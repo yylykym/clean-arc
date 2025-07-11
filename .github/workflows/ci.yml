@@ -27,20 +27,23 @@ jobs:
           java-version: '21'
           cache: gradle
 
-      # 3. 构建并运行所有测试
+      # 3. 授权 gradlew 脚本可执行
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      # 4. 构建并运行所有测试
       - name: Clean build and tests
         run: ./gradlew clean build --no-daemon
 
-      # 4. 静态代码分析（可选，打开 SpotBugs/Checkstyle 插件即可）
+      # 5. 静态代码分析（可选）
       - name: Static code analysis
         run: ./gradlew spotbugsMain spotbugsTest checkstyleMain checkstyleTest || true
-        # 如果希望让分析失败时中断 CI，把最后的 "|| true" 去掉
 
-      # 5. 生成 OpenAPI 规范（如果使用 springdoc-openapi-gradle-plugin）
+      # 6. 生成 OpenAPI 文档（如果使用 springdoc-openapi-gradle-plugin）
       - name: Generate OpenAPI spec
         run: ./gradlew openApi
 
-      # 6. 上传构建产物，供后续查看或手动部署使用
+      # 7. 上传构建产物
       - name: Upload JAR artifacts
         uses: actions/upload-artifact@v4
         with:
