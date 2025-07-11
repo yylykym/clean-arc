@@ -41,13 +41,11 @@ jobs:
 
       # 6. 生成 OpenAPI 文档（如果使用 springdoc-openapi-gradle-plugin）
       - name: Generate OpenAPI spec
-        run: ./gradlew :user-service:user-interfaceadapter:generateOpenApiDocs
+        run: ./gradlew :user-service:user-bootstrap:generateOpenApiDocs
 
       # 7. 上传构建产物
       - name: Upload JAR artifacts
         uses: actions/upload-artifact@v4
         with:
           name: user-service-jars
-          path: |
-            user-service/bootstrap/build/libs/*.jar
-            user-service/user-interfaceadapter/build/libs/*.jar
+          path: user-service/bootstrap/build/libs/*.jar
