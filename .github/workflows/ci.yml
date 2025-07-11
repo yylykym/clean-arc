@@ -1,0 +1,50 @@
+name: CI – Build & Test
+
+# 每次 push 或 PR 时触发
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 拉取代码
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. 设置 JDK 21 并开启 Gradle 缓存
+      - name: Set up JDK 21 and cache Gradle
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+
+      # 3. 构建并运行所有测试
+      - name: Clean build and tests
+        run: ./gradlew clean build --no-daemon
+
+      # 4. 静态代码分析（可选，打开 SpotBugs/Checkstyle 插件即可）
+      - name: Static code analysis
+        run: ./gradlew spotbugsMain spotbugsTest checkstyleMain checkstyleTest || true
+        # 如果希望让分析失败时中断 CI，把最后的 "|| true" 去掉
+
+      # 5. 生成 OpenAPI 规范（如果使用 springdoc-openapi-gradle-plugin）
+      - name: Generate OpenAPI spec
+        run: ./gradlew openApi
+
+      # 6. 上传构建产物，供后续查看或手动部署使用
+      - name: Upload JAR artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: user-service-jars
+          path: |
+            user-service/bootstrap/build/libs/*.jar
+            user-service/user-interfaceadapter/build/libs/*.jar
