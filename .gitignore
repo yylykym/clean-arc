@@ -1,3 +1,22 @@
+# ========== IDE 相关 ==========
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Eclipse
+.settings/
+*.classpath
+*.project
+
+# VS Code
+.vscode/
+
+# ========== Gradle / Maven ==========
+.gradle/
+build/
+/out/
+
+# ========== Java ==========
 # Compiled class file
 *.class
 
@@ -9,6 +28,9 @@
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+# ========== 操作系统 ==========
+.DS_Store
+Thumbs.db
 
 # Package Files #
 *.jar
@@ -22,3 +44,6 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+# ========== 日志 / 临时 ==========
+logs/
+tmp/
