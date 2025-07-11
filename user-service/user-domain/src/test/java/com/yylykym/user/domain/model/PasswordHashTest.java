@@ -1,5 +1,6 @@
 package com.yylykym.user.domain.model;
 
+import com.yylykym.user.domain.exception.InvalidPasswordException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -15,8 +16,8 @@ public class PasswordHashTest {
     @Test
     void blankOrNullHash_shouldThrowException() {
         assertThatThrownBy(() -> new PasswordHash(""))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(InvalidPasswordException.class);
         assertThatThrownBy(() -> new PasswordHash(null))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(InvalidPasswordException.class);
     }
 }
