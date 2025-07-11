@@ -1,5 +1,6 @@
 plugins {
     java                           // 你已在用的
+    alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dep.mgmt)  // 你的版本目录
     // —— 加这一行 ——
     id("org.springdoc.openapi-gradle-plugin") version "1.9.0"
