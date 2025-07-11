@@ -11,3 +11,10 @@ dependencies {
     implementation("org.postgresql:postgresql")
 }
 
+tasks.named<Jar>("jar") {
+    enabled = true
+}
+
+tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    enabled = false
+}
