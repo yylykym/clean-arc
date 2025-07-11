@@ -2,7 +2,6 @@ plugins {
     java
     alias(libs.plugins.spring.dep.mgmt)
     alias(libs.plugins.spring.boot)
-    id("org.springdoc.openapi-gradle-plugin") version "1.9.0"
 }
 
 dependencies {
@@ -13,17 +12,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.9")
-    // —— 去掉下面这行 ——
-    // implementation("org.springdoc.openapi-gradle-plugin:…")
 }
 
-// 插件自带的配置 DSL，生成的任务 name 一般是 generateOpenApiDocs
-openApi {
-    apiDocsUrl.set("http://localhost:8080/v3/api-docs")
-    outputDir.set(layout.buildDirectory.dir("openapi"))
-    outputFileName.set("openapi.json")
-    waitTimeInSeconds.set(10)
-}
+
 
 tasks.named<Jar>("jar") {
     enabled = true
