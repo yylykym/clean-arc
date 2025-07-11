@@ -1,8 +1,7 @@
 plugins {
-    java                           // 你已在用的
+    java
+    alias(libs.plugins.spring.dep.mgmt)
     alias(libs.plugins.spring.boot)
-    alias(libs.plugins.spring.dep.mgmt)  // 你的版本目录
-    // —— 加这一行 ——
     id("org.springdoc.openapi-gradle-plugin") version "1.9.0"
 }
 
@@ -24,4 +23,12 @@ openApi {
     outputDir.set(layout.buildDirectory.dir("openapi"))
     outputFileName.set("openapi.json")
     waitTimeInSeconds.set(10)
+}
+
+tasks.named<Jar>("jar") {
+    enabled = true
+}
+
+tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    enabled = false
 }
