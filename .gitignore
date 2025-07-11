@@ -1,5 +1,29 @@
-/.gradle/
-build/
-**/out/
+# ========== IDE 相关 ==========
+# IntelliJ IDEA
+.idea/
 *.iml
-/.idea/
+
+# Eclipse
+.settings/
+*.classpath
+*.project
+
+# VS Code
+.vscode/
+
+# ========== Gradle / Maven ==========
+.gradle/
+build/
+/out/
+
+# ========== Java ==========
+*.class
+*.log
+
+# ========== 操作系统 ==========
+.DS_Store
+Thumbs.db
+
+# ========== 日志 / 临时 ==========
+logs/
+tmp/
